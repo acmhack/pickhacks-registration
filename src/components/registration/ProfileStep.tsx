@@ -16,7 +16,7 @@ export function ProfileStep({ data, onChange }: ProfileStepProps) {
           Personal Information
         </h2>
         <p className="text-gray-600">
-          Let's start with some basic information about you.
+          Let&apos;s start with some basic information about you.
         </p>
       </div>
 
