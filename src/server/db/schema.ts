@@ -333,6 +333,55 @@ export const eventRegistrationMlhAgreement = pgTable("event_registration_mlh_agr
     .notNull(),
 });
 
+// ==================== Check-in and Event Tracking ====================
+
+// Event Station - Different check-in points for a specific event
+export const eventStation = pgTable(
+  "event_station",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    eventId: text("event_id")
+      .notNull()
+      .references(() => event.id, { onDelete: "cascade" }),
+    name: text("name").notNull(), // "Registration", "Breakfast", "Lunch", etc.
+    stationType: text("station_type").notNull(), // "food", "checkin", "workshop", "prize"
+    maxVisitsPerHacker: integer("max_visits_per_hacker"), // NULL = unlimited, 1 = once only
+    isActive: boolean("is_active")
+      .$defaultFn(() => true)
+      .notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .$defaultFn(() => new Date())
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .$defaultFn(() => new Date())
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (t) => [
+    // Unique constraint: station names unique per event
+    unique("event_station_unique").on(t.eventId, t.name),
+  ],
+);
+
+// Check In - Track all QR code scans and check-ins
+export const checkIn = pgTable("check_in", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  eventRegistrationId: text("event_registration_id")
+    .notNull()
+    .references(() => eventRegistration.id, { onDelete: "cascade" }),
+  eventStationId: text("event_station_id")
+    .notNull()
+    .references(() => eventStation.id, { onDelete: "cascade" }),
+  checkedInAt: timestamp("checked_in_at", { withTimezone: true })
+    .$defaultFn(() => new Date())
+    .notNull(),
+  notes: text("notes"), // Optional notes (admin override reason, etc.)
+});
+
 // ==================== Relations ====================
 
 export const userRelations = relations(user, ({ many, one }) => ({
@@ -354,6 +403,7 @@ export const sessionRelations = relations(session, ({ one }) => ({
 
 export const eventRelations = relations(event, ({ many }) => ({
   registrations: many(eventRegistration),
+  stations: many(eventStation),
 }));
 
 export const hackerProfileRelations = relations(
@@ -396,6 +446,7 @@ export const eventRegistrationRelations = relations(
     }),
     raceEthnicities: many(eventRegistrationRaceEthnicity),
     dietaryRestrictions: many(eventRegistrationDietaryRestrictions),
+    checkIns: many(checkIn),
   }),
 );
 
@@ -478,3 +529,25 @@ export const eventRegistrationMlhAgreementRelations = relations(
     }),
   }),
 );
+
+export const eventStationRelations = relations(
+  eventStation,
+  ({ one, many }) => ({
+    event: one(event, {
+      fields: [eventStation.eventId],
+      references: [event.id],
+    }),
+    checkIns: many(checkIn),
+  }),
+);
+
+export const checkInRelations = relations(checkIn, ({ one }) => ({
+  eventRegistration: one(eventRegistration, {
+    fields: [checkIn.eventRegistrationId],
+    references: [eventRegistration.id],
+  }),
+  eventStation: one(eventStation, {
+    fields: [checkIn.eventStationId],
+    references: [eventStation.id],
+  }),
+}));
