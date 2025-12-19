@@ -56,6 +56,18 @@ export default function AdminLayout({
               >
                 Registrations
               </a>
+              <a
+                href="/admin/check-in"
+                className="text-sm font-medium text-gray-700 hover:text-[#44ab48]"
+              >
+                Check-in
+              </a>
+              <a
+                href="/admin/stations"
+                className="text-sm font-medium text-gray-700 hover:text-[#44ab48]"
+              >
+                Stations
+              </a>
             </nav>
           </div>
         </div>

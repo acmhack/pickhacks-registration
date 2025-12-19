@@ -52,3 +52,19 @@ export const EDUCATION_LEVELS = [
   { value: "bootcamp", label: "Bootcamp" },
   { value: "other", label: "Other" },
 ] as const;
+
+// ==================== Station Types ====================
+export const STATION_TYPES = [
+  { value: "checkin", label: "Check-in" },
+  { value: "food", label: "Food/Meal" },
+  { value: "workshop", label: "Workshop" },
+  { value: "prize", label: "Prize" },
+] as const;
+
+// Default stations to seed for new events
+export const DEFAULT_STATIONS = [
+  { name: "Check-in", stationType: "checkin", maxVisitsPerHacker: 1 },
+  { name: "Breakfast", stationType: "food", maxVisitsPerHacker: 1 },
+  { name: "Lunch", stationType: "food", maxVisitsPerHacker: 1 },
+  { name: "Dinner", stationType: "food", maxVisitsPerHacker: 1 },
+] as const;
