@@ -9,7 +9,7 @@ import { ShippingStep } from "~/components/registration/ShippingStep";
 import { MlhStep } from "~/components/registration/MlhStep";
 import { Button } from "~/components/ui/Button";
 import { submitRegistration, getRegistrationStatus } from "~/server/actions/registration";
-import { getSchools, getCountries, seedLookupData } from "~/server/actions/lookup";
+import { getSchools, getCountries } from "~/server/actions/lookup";
 import type {
   ProfileFormData,
   EducationFormData,
@@ -35,9 +35,6 @@ export default function RegistrationPage() {
   // Fetch lookup data and check registration status
   useEffect(() => {
     async function initialize() {
-      // Seed lookup data if needed
-      await seedLookupData();
-
       // Fetch schools and countries
       const [schoolsData, countriesData] = await Promise.all([
         getSchools(),

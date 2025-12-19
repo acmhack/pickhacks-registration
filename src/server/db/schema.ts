@@ -165,7 +165,6 @@ export const school = pgTable("school", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull().unique(),
-  country: text("country").notNull(),
   isVerified: boolean("is_verified")
     .$defaultFn(() => true)
     .notNull(),
