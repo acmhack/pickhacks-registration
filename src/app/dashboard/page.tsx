@@ -74,11 +74,27 @@ function ApplicationInProgress() {
   );
 }
 
+function ApplicationStatusSkeleton() {
+  return (
+    <div className="mb-6 rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+      <div className="flex items-center gap-4">
+        <div className="h-14 w-14 rounded-full bg-gray-300" />
+
+        <div className="flex-1 space-y-2">
+          <div className="h-6 w-3/4 rounded bg-gray-300" />
+          <div className="h-4 w-5/6 rounded bg-gray-300" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 export default function DashboardPage() {
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [noRegistration, setNoRegistration] = useState(false);
 
   useEffect(() => {
     const fetchQRCode = async () => {
@@ -89,7 +105,8 @@ export default function DashboardPage() {
           const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(status.qrCode)}`;
           setQrCodeUrl(qrUrl);
         } else {
-          setError("No registration found. Please complete the registration form.");
+          setNoRegistration(true);
+          setError("No registration found.");
         }
       } catch (error) {
         console.error("Error fetching QR code:", error);
@@ -106,7 +123,7 @@ export default function DashboardPage() {
     <ProtectedRoute requireEmailVerification={true}>
       <div className="mx-auto max-w-5xl px-8 py-12">
         {/* Status */}
-        {error ? <ApplicationInProgress /> : <ApplicationSubmitted />}
+        {loading ? <ApplicationStatusSkeleton /> : noRegistration ? <ApplicationInProgress /> : <ApplicationSubmitted />}
 
         {/* QR Code Section */}
         <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
