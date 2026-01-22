@@ -54,4 +54,6 @@ Verification URL: ${url}
   baseURL: env.BETTER_AUTH_URL ?? "http://localhost:3000",
 });
 
+console.log("Server secrets:", env);
+
 export type Session = typeof auth.$Infer.Session;
