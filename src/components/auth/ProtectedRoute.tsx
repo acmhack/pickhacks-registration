@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "~/lib/auth-client";
+import { authClient } from "~/lib/auth-client";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export function ProtectedRoute({
   requireEmailVerification = true,
 }: ProtectedRouteProps) {
   const router = useRouter();
-  const { data: session, isPending } = useSession();
+  const { data: session, isPending } = authClient.useSession();
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {

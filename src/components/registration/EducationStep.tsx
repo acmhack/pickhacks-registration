@@ -81,7 +81,7 @@ export function EducationStep({ data, onChange, schools, disabled = false }: Edu
               graduationYear: e.target.value ? parseInt(e.target.value) : null,
             })
           }
-          placeholder="2025"
+          placeholder="2026"
           min={2020}
           max={2035}
           disabled={disabled}

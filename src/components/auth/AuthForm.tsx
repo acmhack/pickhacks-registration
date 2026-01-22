@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { signIn, signUp } from "~/lib/auth-client";
+import { authClient, } from "~/lib/auth-client";
 import { Button } from "~/components/ui/Button";
 import { Divider } from "~/components/ui/Divider";
 import { FormInput } from "~/components/ui/FormInput";
@@ -52,20 +52,32 @@ export function AuthForm() {
 
     try {
       if (isSignIn) {
-        const result = await signIn.email({
+        const result = await authClient.signIn.email({
           email,
           password,
         });
 
         if (result.error) {
-          setError(result.error.message ?? "An error occurred during sign in");
+          if (result.error.code === "EMAIL_NOT_VERIFIED") {
+            const result = await authClient.sendVerificationEmail({
+              email,
+            });
+
+            if (result.error) {
+              setError("Email not verified, please contact pickhacks@mst.edu for assistance");
+            } else {
+              setError("Email not verified, a new verification email has been sent");
+            }
+          } else {
+            setError(result.error.message ?? "An error occurred during sign in");
+          }
           setLoading(false);
         } else {
           // Immediate redirect - middleware will handle auth check
           router.push("/");
         }
       } else {
-        const result = await signUp.email({
+        const result = await authClient.signUp.email({
           email,
           password,
           name,
@@ -74,7 +86,15 @@ export function AuthForm() {
         if (result.error) {
           setError(result.error.message ?? "An error occurred during sign up");
         } else {
-          setSuccess("Please check your email to verify your account");
+          const result = await authClient.sendVerificationEmail({
+            email,
+          });
+
+          if (result.error) {
+            setError(result.error.message ?? "An error occurred during sign in");
+          } else {
+            setSuccess("Please check your email to verify your account");
+          }
         }
         setLoading(false);
       }

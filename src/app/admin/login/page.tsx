@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { signIn } from "~/lib/auth-client";
 import { Button } from "~/components/ui/Button";
 import { Divider } from "~/components/ui/Divider";
 import { FormInput } from "~/components/ui/FormInput";
 import { checkIsAdmin } from "~/server/actions/admin";
+import { authClient } from "~/lib/auth-client";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
     const password = formData.get("password") as string;
 
     try {
-      const result = await signIn.email({
+      const result = await authClient.signIn.email({
         email,
         password,
       });
@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#e8f4e5] via-white to-[#e8f0f8] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-[#e8f4e5] via-white to-[#e8f0f8] px-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="mb-8 text-center">

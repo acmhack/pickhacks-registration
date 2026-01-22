@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Logo } from "~/components/ui/Logo";
-import { signOut } from "~/lib/auth-client";
+import { authClient } from "~/lib/auth-client";
 
 interface SidebarLink {
   href: string;
@@ -37,7 +37,7 @@ export function Sidebar() {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await signOut();
+    await authClient.signOut();
     router.push("/login");
   };
 
@@ -61,11 +61,10 @@ export function Sidebar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${
-                      isActive
+                    className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${isActive
                         ? "bg-[#44ab48] text-white"
                         : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                      }`}
                   >
                     {link.icon}
                     {link.label}
