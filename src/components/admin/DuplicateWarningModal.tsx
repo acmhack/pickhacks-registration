@@ -52,7 +52,7 @@ export function DuplicateWarningModal({
         {/* Warning Header */}
         <div className="bg-amber-50 border-b border-amber-200 px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+            <div className="shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
               <svg
                 className="w-6 h-6 text-amber-600"
                 fill="none"

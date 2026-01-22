@@ -56,17 +56,16 @@ export function HackerInfoCard({
       {/* Dietary Restrictions - Prominent when at food station */}
       {showDietaryProminent && (
         <div
-          className={`px-6 py-4 ${
-            hasDietary
-              ? "bg-amber-50 border-b-2 border-amber-200"
-              : "bg-green-50 border-b border-green-200"
-          }`}
+          className={`px-6 py-4 ${hasDietary
+            ? "bg-amber-50 border-b-2 border-amber-200"
+            : "bg-green-50 border-b border-green-200"
+            }`}
         >
           <div className="flex items-start gap-3">
             {hasDietary ? (
               <>
                 <svg
-                  className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5"
+                  className="w-6 h-6 text-amber-500 shrink-0 mt-0.5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -106,7 +105,7 @@ export function HackerInfoCard({
             ) : (
               <>
                 <svg
-                  className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
+                  className="w-6 h-6 text-green-500 shrink-0 mt-0.5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
