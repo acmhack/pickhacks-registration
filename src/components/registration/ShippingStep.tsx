@@ -131,7 +131,7 @@ export function ShippingStep({
 
       <div>
         <label className="block text-sm font-semibold text-gray-700 mb-2">
-          T-Shirt Size (Optional)
+          T-Shirt Size
         </label>
         <Select
           name="tshirtSize"
@@ -139,6 +139,7 @@ export function ShippingStep({
           onChange={(value) => onChange({ ...data, tshirtSize: value })}
           options={TSHIRT_SIZE_OPTIONS}
           placeholder="Select size"
+          required
           disabled={disabled}
         />
       </div>
