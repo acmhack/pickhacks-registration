@@ -17,20 +17,6 @@ export const educationSchema = z.object({
   graduationYear: z.number().min(1900).max(2100).optional().nullable(),
 });
 
-export const demographicsSchema = z.object({
-  countryOfResidence: z.string().optional(),
-  isUnderrepresented: z.enum(["yes", "no", "unsure", "prefer_not_to_answer"]).optional(),
-  gender: z.string().optional(),
-  genderSelfDescribe: z.string().optional(),
-  pronouns: z.string().optional(),
-  pronounsOther: z.string().optional(),
-  sexualOrientation: z.string().optional(),
-  sexualOrientationOther: z.string().optional(),
-  highestEducation: z.string().optional(),
-  raceEthnicityIds: z.array(z.string()).optional(),
-  raceEthnicityOther: z.string().optional(),
-});
-
 export const dietarySchema = z.object({
   dietaryRestrictionIds: z.array(z.string()).optional(),
   allergyDetails: z.string().optional(),
@@ -43,7 +29,7 @@ export const shippingSchema = z.object({
   state: z.string().min(1, "State is required"),
   country: z.string().min(1, "Country is required"),
   postalCode: z.string().min(1, "Postal code is required"),
-  tshirtSize: z.string().optional(),
+  tshirtSize: z.string().min(1, "T-Shirt size is required"),
 });
 
 export const mlhSchema = z.object({
@@ -58,14 +44,12 @@ export const mlhSchema = z.object({
 
 export type ProfileFormData = z.infer<typeof profileSchema>;
 export type EducationFormData = z.infer<typeof educationSchema>;
-export type DemographicsFormData = z.infer<typeof demographicsSchema>;
 export type DietaryFormData = z.infer<typeof dietarySchema>;
 export type ShippingFormData = z.infer<typeof shippingSchema>;
 export type MlhFormData = z.infer<typeof mlhSchema>;
 
 export type RegistrationFormData = ProfileFormData &
   EducationFormData &
-  DemographicsFormData &
   DietaryFormData &
   ShippingFormData &
   MlhFormData;

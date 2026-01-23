@@ -111,7 +111,7 @@ export function RegistrationForm({
         state: shippingData.state!,
         country: shippingData.country!,
         postalCode: shippingData.postalCode!,
-        tshirtSize: shippingData.tshirtSize,
+        tshirtSize: shippingData.tshirtSize!,
         // Dietary
         dietaryRestrictionIds: dietaryData.dietaryRestrictionIds,
         allergyDetails: dietaryData.allergyDetails,

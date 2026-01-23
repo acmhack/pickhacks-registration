@@ -131,7 +131,7 @@ export function ShippingStep({
 
       <div>
         <label className="block text-sm font-semibold text-gray-700 mb-2">
-          T-Shirt Size
+          T-Shirt Size *
         </label>
         <Select
           name="tshirtSize"
