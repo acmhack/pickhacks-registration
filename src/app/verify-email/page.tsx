@@ -50,10 +50,10 @@ export default function VerifyEmailPage() {
                 <p>
                   Check your spam folder, or contact us at{" "}
                   <a
-                    href="mailto:hello@pickhacks.io"
+                    href="mailto:pickhacks@mst.edu"
                     className="font-medium underline"
                   >
-                    hello@pickhacks.io
+                    pickhacks@mst.edu
                   </a>
                 </p>
               </div>

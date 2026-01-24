@@ -201,10 +201,10 @@ export default function DashboardPage() {
               <dd className="text-base text-gray-900">
                 Reach out to us at{" "}
                 <a
-                  href="mailto:hello@pickhacks.io"
+                  href="mailto:pickhacks@mst.edu"
                   className="text-[#44ab48] hover:underline"
                 >
-                  hello@pickhacks.io
+                  pickhacks@mst.edu
                 </a>
               </dd>
             </div>
