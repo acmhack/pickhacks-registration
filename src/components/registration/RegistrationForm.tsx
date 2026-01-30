@@ -157,7 +157,7 @@ export function RegistrationForm({
             Registration
           </h1>
           <p className="text-lg text-gray-600">
-            {isRegistered ? "Your registration for PickHacks 2025" : "Complete your registration for PickHacks 2025"}
+            {isRegistered ? "Your registration for PickHacks 2026" : "Complete your registration for PickHacks 2026"}
           </p>
           {isRegistered && (
             <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#e8f4e5] px-4 py-2 text-sm font-medium text-[#44ab48]">

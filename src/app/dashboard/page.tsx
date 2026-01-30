@@ -29,7 +29,7 @@ function ApplicationSubmitted() {
             Registration Submitted
           </h1>
           <p className="mt-1 text-gray-600">
-            Thank you for registering for PickHacks 2025! We&apos;ll email you
+            Thank you for registering for PickHacks 2026! We&apos;ll email you
             with updates and event details.
           </p>
         </div>
@@ -65,7 +65,7 @@ function ApplicationInProgress() {
             Registration Incomplete
           </h1>
           <p className="mt-1 text-gray-700">
-            Your registration for PickHacks 2025 is incomplete.
+            Your registration for PickHacks 2026 is incomplete.
             No spot is reserved until you submit your registration.
           </p>
         </div>

@@ -52,7 +52,7 @@ export function Sidebar() {
       <nav className="flex-1 p-4">
         <div className="mb-6">
           <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-            PickHacks 2025
+            PickHacks 2026
           </h3>
           <ul className="space-y-1">
             {navigationLinks.map((link) => {
@@ -62,8 +62,8 @@ export function Sidebar() {
                   <Link
                     href={link.href}
                     className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${isActive
-                        ? "bg-[#44ab48] text-white"
-                        : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-[#44ab48] text-white"
+                      : "text-gray-700 hover:bg-gray-100"
                       }`}
                   >
                     {link.icon}
